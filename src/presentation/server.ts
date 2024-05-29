@@ -2,6 +2,7 @@ import { CheckService } from "../domain/use-cases/checks/check-service";
 import { FileSystemDatasource } from "../infraestructure/datasources/file-system.datasource";
 import { LogRepositoryImpl } from "../infraestructure/repositories/log.repository.impl";
 import { CronService } from "./cron/cron-service";
+import { EmailService } from "./email/email.service";
 
 
 const fileSystemLogRepository = new LogRepositoryImpl(
@@ -15,23 +16,36 @@ export class Server {
 
         console.log('Server started....');
 
-        CronService.createJob(
-            '*/5 * * * * *',
-            () => {
-                // const date = new Date();
-                // console.log( '5 second', date );
+        //====== Enviar Email ======//
+        const emailService = new EmailService();
+        emailService.sendEmail({
+            to: 'leandroaltuna@gmail.com',
+            subject: 'Logs de Sistema NODE',
+            htmlBody: `
+                <h3>Logs de Sistema - NOC</h3>
+                <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
+                <p>Ver logs adjuntos</p>
+            `,
+        });
 
-                const url = 'https://google.com';
-                new CheckService(
-                    fileSystemLogRepository,
-                    () => console.log( `${ url } is ok` ),
-                    ( error ) => console.log( error )
-                ).execute( url );
-                // new CheckService().execute( 'http://localhost:3000' );
+        //====== Registro de Logs ======//
+        // CronService.createJob(
+        //     '*/5 * * * * *',
+        //     () => {
+        //         // const date = new Date();
+        //         // console.log( '5 second', date );
+
+        //         const url = 'https://www.google.com';
+        //         new CheckService(
+        //             fileSystemLogRepository,
+        //             () => console.log( `${ url } is ok` ),
+        //             ( error ) => console.log( error )
+        //         ).execute( url );
+        //         // new CheckService().execute( 'http://localhost:3000' );
 
 
-            }
-        );
+        //     }
+        // );
 
     }
 
