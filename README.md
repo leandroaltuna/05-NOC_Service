@@ -10,13 +10,17 @@ El objetivo es crear una serie de tareas usando Arquitectura Limpia con TypeScri
     ```
     docker compose up -d
     ```
-5. Instalar CRON (si no lo tuviera)
-6. Paquetes para variables de entorno en versiones de Node menores a v20
+5. Ejecutar el comando para restaurar BD en postgres usando prisma
+    ```
+    npx prisma migrate dev
+    ```
+6. Instalar CRON (si no lo tuviera)
+7. Paquetes para variables de entorno en versiones de Node menores a v20
     ````
     dotenv
     env-var
     ````
-6. Ejecutar ``npm run dev`` 
+8. Ejecutar ``npm run dev`` 
 
 ## Obterner Gmail Key
 [Google AppPaswords](https://myaccount.google.com/u/0/apppasswords)
