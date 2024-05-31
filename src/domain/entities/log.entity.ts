@@ -37,7 +37,7 @@ export class LogEntity {
     // { "level": "high", "message": "Hola Mundo", "createdAt": "63278372TZ37373" }
     static fromJson = ( json: string ): LogEntity => {
 
-        json = ( json === '' ) ? '{}' : json;
+        // json = ( json === '' ) ? '{}' : json;
 
         const { level, message, origin, createdAt } = JSON.parse( json );
 
@@ -45,7 +45,8 @@ export class LogEntity {
             message: message, 
             level: level,
             origin: origin,
-            createdAt: createdAt
+            createdAt: new Date(createdAt),
+            // createdAt: createdAt,
         });
         // log.createdAt = new Date( createdAt );
 

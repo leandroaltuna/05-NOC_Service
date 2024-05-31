@@ -58,8 +58,9 @@ export class FileSystemDatasource implements LogDatasource {
         const content = fs.readFileSync( path, 'utf-8' );
         // if ( content === '' ) return [];
 
-        // version corta
-        const logs = content.split('\n').map( LogEntity.fromJson );
+        // version corta.
+        // log => log != '' para validar si el json regresa un registro vacio.
+        const logs = content.split('\n').filter( log => log != '' ).map( LogEntity.fromJson );
         // version larga
         // const log = content.split('\n').map(
         //     log => LogEntity.fromJson( log )
