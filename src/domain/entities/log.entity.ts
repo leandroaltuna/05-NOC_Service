@@ -37,6 +37,8 @@ export class LogEntity {
     // { "level": "high", "message": "Hola Mundo", "createdAt": "63278372TZ37373" }
     static fromJson = ( json: string ): LogEntity => {
 
+        json = ( json === '' ) ? '{}' : json;
+
         const { level, message, origin, createdAt } = JSON.parse( json );
 
         const log = new LogEntity({
@@ -46,6 +48,22 @@ export class LogEntity {
             createdAt: createdAt
         });
         // log.createdAt = new Date( createdAt );
+
+        return log;
+
+    }
+
+    // se está utilizando [key: string]: any para indicar que el objeto puede tener cualquier cantidad de propiedades y que el nombre de estas propiedades es un string, es decir, el key es un string y el valor de esa propiedad puede ser de cualquier tipo.
+    static fromObject = ( object: { [key: string]: any } ): LogEntity => {
+
+        const { level, message, origin, createdAt } = object;
+
+        const log = new LogEntity({
+            message,
+            level,
+            origin,
+            createdAt,
+        });
 
         return log;
 

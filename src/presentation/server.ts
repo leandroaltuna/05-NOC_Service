@@ -1,13 +1,16 @@
+import { LogSeverityLevel } from "../domain/entities/log.entity";
 import { CheckService } from "../domain/use-cases/checks/check-service";
 import { sendEmailLogs } from "../domain/use-cases/email/send-email-logs";
 import { FileSystemDatasource } from "../infraestructure/datasources/file-system.datasource";
+import { MongoLogDatasource } from "../infraestructure/datasources/mongo-log.datasource";
 import { LogRepositoryImpl } from "../infraestructure/repositories/log.repository.impl";
 import { CronService } from "./cron/cron-service";
 import { EmailService } from "./email/email.service";
 
 
-const fileSystemLogRepository = new LogRepositoryImpl(
+const logRepository = new LogRepositoryImpl(
     new FileSystemDatasource(),
+    // new MongoLogDatasource(),
 );
 
  //====== Enviar Email With Logs using UseCase ======//
@@ -15,9 +18,9 @@ const fileSystemLogRepository = new LogRepositoryImpl(
 
 export class Server {
 
-    public static start () {
+    public static async start () {
 
-        console.log('Server started....');
+        console.log('Server started....!!');
 
         //====== Enviar Email ======//
         // const emailService = new EmailService();
@@ -45,6 +48,9 @@ export class Server {
         //     'leandroaltuna@gmail.com', 'accountsweb@hotmail.com'
         // ]);
 
+        const logs = await logRepository.getLogs( LogSeverityLevel.medium );
+        console.log( logs );
+
         //====== Registro de Logs ======//
         // CronService.createJob(
         //     '*/5 * * * * *',
@@ -54,13 +60,11 @@ export class Server {
 
         //         const url = 'https://www.google.com';
         //         new CheckService(
-        //             fileSystemLogRepository,
+        //             logRepository,
         //             () => console.log( `${ url } is ok` ),
         //             ( error ) => console.log( error )
         //         ).execute( url );
         //         // new CheckService().execute( 'http://localhost:3000' );
-
-
         //     }
         // );
 
