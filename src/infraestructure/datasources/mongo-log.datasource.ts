@@ -9,7 +9,7 @@ export class MongoLogDatasource implements LogDatasource {
        
         const newLog = await logModel.create( log );
         // await newLog.save(); // es opcional ya que con el create es suficiente.
-        console.log( 'Mongo Log created: ' + newLog.id );
+        console.log( 'Mongo Log created: ', newLog.id );
 
     }
 

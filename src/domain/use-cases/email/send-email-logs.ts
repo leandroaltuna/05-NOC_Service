@@ -44,7 +44,7 @@ export class sendEmailLogs implements SendLogEmailUseCase {
         const log = new LogEntity({
             message: errorMessage,
             level: LogSeverityLevel.high,
-            origin: 'send-email-log.ts'
+            origin: 'send-email-logs.ts'
         });
 
         this.logRepository.saveLog( log );

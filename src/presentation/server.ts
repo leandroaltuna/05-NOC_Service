@@ -80,21 +80,19 @@ export class Server {
         // );
 
         //====== Registro de Logs a Multiple BD ======//
-        // CronService.createJob(
-        //     '*/5 * * * * *',
-        //     () => {
-        //         // const date = new Date();
-        //         // console.log( '5 second', date );
+        CronService.createJob(
+            '*/5 * * * * *',
+            () => {
 
-        //         const url = 'https://www.youtube.com';
-        //         new CheckServiceMultiple(
-        //             [ fsLogRepository, mongoLogRepository, postgresLogRepository ],
-        //             () => console.log( `${ url } is ok` ),
-        //             ( error ) => console.log( error )
-        //         ).execute( url );
-        //         // new CheckService().execute( 'http://localhost:3000' );
-        //     }
-        // );
+                const url = 'https://www.youtube.com';
+                new CheckServiceMultiple(
+                    [ fsLogRepository, mongoLogRepository, postgresLogRepository ],
+                    () => console.log( `${ url } is ok` ),
+                    ( error ) => console.log( error )
+                ).execute( url );
+            
+            }
+        );
 
     }
 

@@ -9,6 +9,9 @@ logs/
 
 .env
 
+coverage/
 
-mongo/
-postgres/
+/mongo
+/postgres
+/mongo-test
+/postgres-test
