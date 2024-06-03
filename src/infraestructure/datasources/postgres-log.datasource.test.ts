@@ -13,7 +13,9 @@ describe( 'postgres-log.datasource.ts', () => {
         level: LogSeverityLevel.medium,
     });
 
-    // const testPrisma = new PrismaClient();
+    const testPrisma = new PrismaClient();
+    console.log( testPrisma.$connect() );
+    // console.log( process.env.POSTGRES_URL );
 
     // afterEach( async() => {
     //     await testPrisma.logModel.deleteMany();
